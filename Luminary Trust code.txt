@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminary Trust — Illuminating Lives, Transforming Futures</title>
+<meta name="description" content="Luminary Trust is a non-profit organization dedicated to education, healthcare, and community development across 12 regions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #8B6914;
+    --ink: #0D0D0D;
+    --charcoal: #1A1A1A;
+    --slate: #2C2C2C;
+    --ivory: #FAF7F2;
+    --warm-white: #F5F0E8;
+    --muted: #7A7268;
+    --border: rgba(201,169,110,0.2);
+    --shadow: 0 40px 80px rgba(0,0,0,0.3);
+  }
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  html { scroll-behavior: smooth; font-size: 16px; }
+ 
+  body {
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+ 
+  /* ── CUSTOM SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--charcoal); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+ 
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.5s ease;
+  }
+  nav.scrolled {
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(20px);
+    padding: 1rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; font-weight: 300; color: var(--ivory); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--ivory); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0.7; transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold) !important; padding: 0.6rem 1.5rem !important;
+    opacity: 1 !important; transition: all 0.3s ease !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 1px; background: var(--ivory); transition: all 0.3s; }
+ 
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    background: var(--ink);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(201,169,110,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .hero-lines::before, .hero-lines::after {
+    content: '';
+    position: absolute;
+    width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    animation: lineFloat 8s ease-in-out infinite;
+  }
+  .hero-lines::before { left: 20%; height: 60%; top: 20%; opacity: 0.3; animation-delay: 0s; }
+  .hero-lines::after { right: 25%; height: 40%; top: 30%; opacity: 0.2; animation-delay: 3s; }
+  @keyframes lineFloat { 0%,100%{transform:scaleY(1) translateY(0)} 50%{transform:scaleY(1.1) translateY(-10px)} }
+ 
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 900px; text-align: center; padding: 2rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem; opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px; background: var(--gold); opacity: 0.5;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--ivory); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-subtitle {
+    font-size: 1.05rem; color: rgba(250,247,242,0.6);
+    max-width: 520px; margin: 0 auto 3rem; font-weight: 300;
+    opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--ink);
+    padding: 1rem 2.5rem; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    transition: all 0.4s ease; text-decoration: none; display: inline-block;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.2); transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  .btn-primary:hover::after { transform: translateX(0); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(201,169,110,0.3); }
+  .btn-ghost {
+    background: transparent; color: var(--ivory);
+    padding: 1rem 2.5rem; border: 1px solid rgba(250,247,242,0.3); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
+    transition: all 0.3s ease; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+ 
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeIn 1s ease 1.5s forwards;
+  }
+  .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+ 
+  /* ── IMPACT COUNTER ── */
+  #impact {
+    padding: 6rem 4rem;
+    background: var(--charcoal);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .impact-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .impact-item {
+    padding: 3rem 2rem; text-align: center;
+    border-right: 1px solid var(--border); position: relative;
+    transition: background 0.3s;
+  }
+  .impact-item:last-child { border-right: none; }
+  .impact-item:hover { background: rgba(201,169,110,0.05); }
+  .impact-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300;
+    color: var(--gold); display: block; line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .impact-label {
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--muted);
+  }
+ 
+  /* ── SECTION STYLES ── */
+  section { position: relative; }
+  .section-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.1; color: var(--ivory); margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+ 
+  /* ── MISSION ── */
+  #mission {
+    padding: 10rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8rem; max-width: 1200px; margin: 0 auto;
+    align-items: center;
+  }
+  .mission-visual {
+    position: relative;
+  }
+  .mission-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--slate) 100%);
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .mission-frame::before {
+    content: ''; position: absolute;
+    inset: 20px; border: 1px solid rgba(201,169,110,0.2);
+    pointer-events: none; z-index: 2;
+  }
+  .mission-frame-inner {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.15), transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mission-quote-badge {
+    position: absolute; bottom: -2rem; right: -2rem;
+    background: var(--gold); color: var(--ink);
+    padding: 2rem; max-width: 220px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic; line-height: 1.4;
+  }
+  .mission-text p { color: rgba(250,247,242,0.7); margin-bottom: 1.5rem; }
+  .mission-values { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+  .value-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.5rem; border-left: 2px solid var(--gold);
+    background: rgba(201,169,110,0.05); transition: background 0.3s;
+  }
+  .value-item:hover { background: rgba(201,169,110,0.1); }
+  .value-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); }
+  .value-desc { font-size: 0.8rem; color: var(--muted); }
+ 
+  /* ── PROGRAMS ── */
+  #programs { padding: 10rem 4rem; background: var(--charcoal); }
+  .programs-inner { max-width: 1200px; margin: 0 auto; }
+  .programs-header { margin-bottom: 5rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .program-card {
+    background: var(--ink); padding: 4rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.4s ease; cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .program-card:hover { border-color: var(--border); transform: translateY(-4px); }
+  .program-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-icon {
+    width: 60px; height: 60px; margin-bottom: 2rem;
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; color: var(--gold); transition: background 0.3s;
+  }
+  .program-card:hover .program-icon { background: rgba(201,169,110,0.1); }
+  .program-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ivory); margin-bottom: 1rem; }
+  .program-desc { color: rgba(250,247,242,0.55); font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.8; }
+  .program-progress-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
+  .progress-bar { height: 2px; background: rgba(201,169,110,0.15); width: 100%; }
+  .progress-fill { height: 100%; background: linear-gradient(to right, var(--gold-dark), var(--gold)); transition: width 1.5s ease; }
+  .program-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; margin-top: 1.5rem; transition: gap 0.3s; }
+  .program-link:hover { gap: 1rem; }
+ 
+  /* ── PROJECTS / CAMPAIGNS ── */
+  #campaigns { padding: 10rem 4rem; }
+  .campaigns-inner { max-width: 1200px; margin: 0 auto; }
+  .campaigns-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .campaign-card {
+    background: var(--charcoal); border: 1px solid var(--border);
+    overflow: hidden; transition: all 0.4s ease;
+  }
+  .campaign-card:hover { transform: translateY(-8px); box-shadow: 0 40px 60px rgba(0,0,0,0.4); border-color: var(--gold); }
+  .campaign-thumb {
+    height: 220px;
+    background: linear-gradient(135deg, var(--slate), var(--charcoal));
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .campaign-thumb-icon { font-size: 3rem; opacity: 0.3; }
+  .campaign-tag {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--gold); color: var(--ink);
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.3rem 0.8rem; font-weight: 500;
+  }
+  .campaign-body { padding: 2rem; }
+  .campaign-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--ivory); }
+  .campaign-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .campaign-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); padding-top: 1rem; border-top: 1px solid var(--border); }
+  .campaign-meta strong { color: var(--gold); }
+ 
+  /* ── TESTIMONIALS ── */
+  #testimonials { padding: 10rem 4rem; background: var(--charcoal); overflow: hidden; }
+  .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+  .testimonials-track { display: flex; gap: 2rem; margin-top: 4rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 1rem; }
+  .testimonials-track::-webkit-scrollbar { display: none; }
+  .testimonial-card {
+    min-width: 380px; background: var(--ink); border: 1px solid var(--border);
+    padding: 3rem; flex-shrink: 0; position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; color: var(--gold); opacity: 0.15;
+    position: absolute; top: -1rem; left: 1.5rem; line-height: 1;
+  }
+  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; line-height: 1.7; color: rgba(250,247,242,0.8); margin-bottom: 2rem; position: relative; }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+  .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); }
+  .author-name { font-weight: 500; font-size: 0.9rem; color: var(--ivory); }
+  .author-role { font-size: 0.75rem; color: var(--muted); }
+ 
+  /* ── DONATION ── */
+  #donate { padding: 10rem 4rem; }
+  .donate-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+  .donate-info {}
+  .donate-info p { color: rgba(250,247,242,0.65); margin-bottom: 1.5rem; }
+  .donate-trust-badges { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+  .badge { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border: 1px solid var(--border); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
+  .badge-icon { color: var(--gold); }
+  .donate-form { background: var(--charcoal); border: 1px solid var(--border); padding: 3rem; }
+  .form-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: block; }
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+  .amount-btn {
+    padding: 0.8rem; border: 1px solid var(--border); background: transparent;
+    color: var(--ivory); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; transition: all 0.3s; text-align: center;
+  }
+  .amount-btn:hover, .amount-btn.active { border-color: var(--gold); background: rgba(201,169,110,0.1); color: var(--gold); }
+  .amount-btn small { display: block; font-size: 0.65rem; color: var(--muted); margin-top: 0.25rem; }
+  .form-input {
+    width: 100%; background: var(--ink); border: 1px solid var(--border);
+    color: var(--ivory); padding: 0.9rem 1rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; outline: none; transition: border-color 0.3s; margin-bottom: 1.5rem;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: var(--muted); }
+  .frequency-toggle { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
+  .freq-btn {
+    flex: 1; padding: 0.7rem; border: 1px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s;
+  }
+  .freq-btn.active { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .impact-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem; font-style: italic; }
+ 
+  /* ── GET INVOLVED ── */
+  #involved { padding: 10rem 4rem; background: var(--charcoal); }
+  .involved-inner { max-width: 1200px; margin: 0 auto; }
+  .involved-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+  .involved-card {
+    background: var(--ink); padding: 3.5rem 2.5rem;
+    border: 1px solid transparent; transition: all 0.4s;
+    text-align: center;
+  }
+  .involved-card:hover { border-color: var(--border); background: rgba(201,169,110,0.03); }
+  .involved-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+  .involved-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ivory); margin-bottom: 1rem; }
+  .involved-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+ 
+  /* ── NEWS ── */
+  #news { padding: 10rem 4rem; }
+  .news-inner { max-width: 1200px; margin: 0 auto; }
+  .news-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 4rem; }
+  .news-featured { background: var(--charcoal); border: 1px solid var(--border); overflow: hidden; }
+  .news-thumb { height: 300px; background: linear-gradient(135deg, var(--slate), #1E1A14); display:flex; align-items:center; justify-content:center; font-size:4rem; opacity:0.4; }
+  .news-body { padding: 2.5rem; }
+  .news-date { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .news-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ivory); margin-bottom: 1rem; line-height: 1.2; }
+  .news-excerpt { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+  .news-aside { display: flex; flex-direction: column; gap: 2px; }
+  .news-item { background: var(--charcoal); border: 1px solid var(--border); padding: 1.5rem; transition: border-color 0.3s; cursor: pointer; }
+  .news-item:hover { border-color: var(--gold); }
+  .news-item-date { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .news-item-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ivory); line-height: 1.3; }
+ 
+  /* ── PARTNERS ── */
+  #partners { padding: 6rem 4rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .partners-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+  .partners-label { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
+  .partners-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; align-items: center; }
+  .partner-logo {
+    padding: 1rem 2rem; border: 1px solid var(--border);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    color: var(--muted); letter-spacing: 0.1em; transition: all 0.3s;
+    cursor: default;
+  }
+  .partner-logo:hover { color: var(--gold); border-color: var(--gold); }
+ 
+  /* ── CONTACT ── */
+  #contact { padding: 10rem 4rem; background: var(--charcoal); }
+  .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; }
+  .contact-info {}
+  .contact-info p { color: rgba(250,247,242,0.65); margin-bottom: 2.5rem; }
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-detail { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-detail-icon { color: var(--gold); font-size: 1rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .contact-detail-text { font-size: 0.9rem; color: rgba(250,247,242,0.7); }
+  .contact-detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+  .social-links { display: flex; gap: 0.75rem; margin-top: 2.5rem; }
+  .social-link { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 1rem; transition: all 0.3s; }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
+  .contact-form {}
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  textarea.form-input { min-height: 120px; resize: vertical; }
+ 
+  /* ── MAP PLACEHOLDER ── */
+  .map-block {
+    height: 200px; background: var(--ink); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 0.8rem; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-top: 2rem; position: relative;
+    overflow: hidden;
+  }
+  .map-block::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.08), transparent 70%);
+  }
+ 
+  /* ── FOOTER ── */
+  footer { background: var(--ink); border-top: 1px solid var(--border); padding: 6rem 4rem 3rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+  .footer-brand {}
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--gold); margin-bottom: 1rem; display: block; }
+  .footer-tagline { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 260px; }
+  .footer-col-title { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--ivory); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); }
+  .footer-legal { display: flex; gap: 2rem; }
+  .footer-legal a { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+  .footer-legal a:hover { color: var(--gold); }
+ 
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+ 
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+ 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1.5rem 2rem; }
+    nav.scrolled { padding: 1rem 2rem; }
+    #mission { grid-template-columns: 1fr; gap: 4rem; padding: 6rem 2rem; }
+    .mission-quote-badge { display: none; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .campaigns-grid { grid-template-columns: repeat(2, 1fr); }
+    .donate-inner { grid-template-columns: 1fr; gap: 4rem; }
+    .involved-grid { grid-template-columns: repeat(2, 1fr); }
+    .news-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    .impact-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .impact-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    #impact { padding: 4rem 1.5rem; }
+    #mission, #programs, #campaigns, #testimonials, #donate, #involved, #news, #contact, footer { padding: 5rem 1.5rem; }
+    #partners { padding: 4rem 1.5rem; }
+    .campaigns-grid, .involved-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-content { padding: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .amount-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+ 
+  /* ── MOBILE NAV OVERLAY ── */
+  .mobile-nav {
+    position: fixed; inset: 0; background: var(--charcoal); z-index: 200;
+    display: none; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .mobile-nav.open { display: flex; opacity: 1; }
+  .mobile-nav a { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--ivory); text-decoration: none; transition: color 0.3s; }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav-close { position: absolute; top: 2rem; right: 2rem; font-size: 1.5rem; color: var(--ivory); cursor: pointer; background: none; border: none; }
+ 
+  /* ── NOTIFICATION ── */
+  .notify {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+    background: var(--gold); color: var(--ink);
+    padding: 1rem 1.5rem; font-size: 0.8rem; font-weight: 500;
+    transform: translateY(100px); opacity: 0; transition: all 0.4s ease;
+    max-width: 280px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .notify.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+ 
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#mission" onclick="closeMobileNav()">About</a>
+  <a href="#programs" onclick="closeMobileNav()">Programs</a>
+  <a href="#campaigns" onclick="closeMobileNav()">Campaigns</a>
+  <a href="#involved" onclick="closeMobileNav()">Get Involved</a>
+  <a href="#news" onclick="closeMobileNav()">News</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#donate" onclick="closeMobileNav()" style="color:var(--gold)">Donate</a>
+</div>
+ 
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Luminary<span> Trust</span></a>
+  <ul class="nav-links">
+    <li><a href="#mission">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#campaigns">Campaigns</a></li>
+    <li><a href="#involved">Get Involved</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Est. 2008 &nbsp;•&nbsp; 12 Regions &nbsp;•&nbsp; 5,000+ Lives</div>
+    <h1 class="hero-title">Illuminating Lives,<br><em>Transforming</em> Futures</h1>
+    <p class="hero-subtitle">We believe every individual deserves dignity, opportunity, and the chance to flourish. Together, we build the world that ought to exist.</p>
+    <div class="hero-actions">
+      <a href="#donate" class="btn-primary">Donate Now</a>
+      <a href="#programs" class="btn-ghost">Explore Our Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+ 
+<!-- IMPACT COUNTERS -->
+<section id="impact">
+  <div class="impact-grid">
+    <div class="impact-item reveal">
+      <span class="impact-number" data-target="5000">0</span>
+      <span class="impact-label">Lives Impacted</span>
+    </div>
+    <div class="impact-item reveal reveal-delay-1">
+      <span class="impact-number" data-target="12">0</span>
+      <span class="impact-label">Regions Covered</span>
+    </div>
+    <div class="impact-item reveal reveal-delay-2">
+      <span class="impact-number" data-target="48">0</span>
+      <span class="impact-label">Active Projects</span>
+    </div>
+    <div class="impact-item reveal reveal-delay-3">
+      <span class="impact-number" data-target="230">0</span>
+      <span class="impact-label">Volunteers Worldwide</span>
+    </div>
+  </div>
+</section>
+ 
+<!-- MISSION -->
+<section>
+  <div id="mission">
+    <div class="mission-visual reveal">
+      <div class="mission-frame">
+        <div class="mission-frame-inner">
+          <svg viewBox="0 0 200 200" width="160" style="opacity:0.25">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#C9A96E" stroke-width="1"/>
+            <circle cx="100" cy="100" r="50" fill="none" stroke="#C9A96E" stroke-width="0.5"/>
+            <line x1="100" y1="20" x2="100" y2="180" stroke="#C9A96E" stroke-width="0.5"/>
+            <line x1="20" y1="100" x2="180" y2="100" stroke="#C9A96E" stroke-width="0.5"/>
+            <polygon points="100,40 115,75 155,75 125,97 135,130 100,110 65,130 75,97 45,75 85,75" fill="#C9A96E" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="mission-quote-badge">
+          "Not charity, but a hand extended in solidarity."
+        </div>
+      </div>
+    </div>
+    <div class="mission-text reveal reveal-delay-1">
+      <div class="section-eyebrow">Our Foundation</div>
+      <h2 class="section-title">Rooted in <em>Purpose</em>,<br>Driven by Impact</h2>
+      <p>For over 15 years, Luminary Trust has been the bridge between compassion and action. We don't just address symptoms — we dismantle the structures that create inequality.</p>
+      <p>Our work spans education, healthcare, environment, and disaster relief, uniting a community of changemakers who believe lasting transformation is possible.</p>
+      <div class="mission-values">
+        <div class="value-item">
+          <div>
+            <div class="value-name">Integrity</div>
+            <div class="value-desc">Every decision guided by transparency and accountability.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div>
+            <div class="value-name">Compassion</div>
+            <div class="value-desc">Human dignity at the heart of every initiative.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div>
+            <div class="value-name">Resilience</div>
+            <div class="value-desc">Building communities strong enough to lead their own futures.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-inner">
+    <div class="programs-header reveal">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Four Pillars of <em>Change</em></h2>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-icon">🎓</div>
+        <div class="program-title">Education</div>
+        <p class="program-desc">Empowering the next generation through scholarships, digital literacy, and community learning centres that reach even the most remote regions.</p>
+        <div class="program-progress-label"><span>Funding Progress</span><span>78%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0" data-width="78%"></div></div>
+        <a href="#" class="program-link">View Initiative →</a>
+      </div>
+      <div class="program-card reveal reveal-delay-1">
+        <div class="program-icon">🏥</div>
+        <div class="program-title">Healthcare</div>
+        <p class="program-desc">Mobile clinics, maternal health programs, and preventive care drives bring essential medical services to underserved communities.</p>
+        <div class="program-progress-label"><span>Funding Progress</span><span>64%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0" data-width="64%"></div></div>
+        <a href="#" class="program-link">View Initiative →</a>
+      </div>
+      <div class="program-card reveal reveal-delay-2">
+        <div class="program-icon">🌿</div>
+        <div class="program-title">Environment</div>
+        <p class="program-desc">Reforestation, clean water access, and sustainable livelihoods that restore ecosystems while lifting families out of poverty.</p>
+        <div class="program-progress-label"><span>Funding Progress</span><span>91%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0" data-width="91%"></div></div>
+        <a href="#" class="program-link">View Initiative →</a>
+      </div>
+      <div class="program-card reveal reveal-delay-3">
+        <div class="program-icon">🆘</div>
+        <div class="program-title">Disaster Relief</div>
+        <p class="program-desc">Rapid deployment of aid, shelter, and psychological support to communities recovering from natural and man-made crises.</p>
+        <div class="program-progress-label"><span>Funding Progress</span><span>55%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0" data-width="55%"></div></div>
+        <a href="#" class="program-link">View Initiative →</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CAMPAIGNS -->
+<section id="campaigns">
+  <div class="campaigns-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Active Now</div>
+      <h2 class="section-title">Featured <em>Campaigns</em></h2>
+    </div>
+    <div class="campaigns-grid">
+      <div class="campaign-card reveal reveal-delay-1">
+        <div class="campaign-thumb">
+          <span class="campaign-thumb-icon">📚</span>
+          <div class="campaign-tag">Education</div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-title">1,000 Classrooms Initiative</div>
+          <p class="campaign-desc">Building and equipping digital classrooms for rural schools across 5 states, connecting 40,000 students to the future they deserve.</p>
+          <div class="campaign-meta">
+            <span>Raised: <strong>₹ 18.4L</strong></span>
+            <span>Goal: <strong>₹ 25L</strong></span>
+            <span>Days left: <strong>34</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="campaign-card reveal reveal-delay-2">
+        <div class="campaign-thumb">
+          <span class="campaign-thumb-icon">💧</span>
+          <div class="campaign-tag">Environment</div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-title">Clean Water for 50 Villages</div>
+          <p class="campaign-desc">Installing solar-powered water purification systems in drought-prone regions, ending the daily 6-kilometre walk for clean water.</p>
+          <div class="campaign-meta">
+            <span>Raised: <strong>₹ 9.1L</strong></span>
+            <span>Goal: <strong>₹ 15L</strong></span>
+            <span>Days left: <strong>61</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="campaign-card reveal reveal-delay-3">
+        <div class="campaign-thumb">
+          <span class="campaign-thumb-icon">🤱</span>
+          <div class="campaign-tag">Healthcare</div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-title">Maternal Health Drive</div>
+          <p class="campaign-desc">Trained midwives, prenatal nutrition, and emergency transport for expectant mothers in regions where maternal mortality remains a crisis.</p>
+          <div class="campaign-meta">
+            <span>Raised: <strong>₹ 6.8L</strong></span>
+            <span>Goal: <strong>₹ 12L</strong></span>
+            <span>Days left: <strong>88</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Human Stories</div>
+      <h2 class="section-title">Words from <em>Those We Serve</em></h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"The scholarship changed everything. I was the first in my village to attend university. Now I am an engineer. Luminary Trust did not give me charity — they gave me a future."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Arjun Meena</div>
+            <div class="author-role">Scholarship Beneficiary, Rajasthan</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-text">"When the flood took everything, Luminary's team was there within 48 hours. They brought not just food, but warmth and hope. We rebuilt because of them."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">P</div>
+          <div>
+            <div class="author-name">Priya Devan</div>
+            <div class="author-role">Disaster Relief Recipient, Kerala</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-text">"As a volunteer, I have seen the meticulous care that goes into each programme. Every rupee donated is respected. This organisation is the real thing."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Rohan Kapoor</div>
+            <div class="author-role">Field Volunteer, 3 Years</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <p class="testimonial-text">"The mobile clinic came to our village for the first time in years. My mother was diagnosed and treated early. I cannot put a price on what that means."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sunita Bai</div>
+            <div class="author-role">Healthcare Beneficiary, MP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- DONATION -->
+<section id="donate">
+  <div class="donate-inner">
+    <div class="donate-info reveal">
+      <div class="section-eyebrow">Give</div>
+      <h2 class="section-title">Your Gift<br><em>Multiplies</em></h2>
+      <p>Every contribution — no matter how small — is deployed with precision and care. We publish our full financials annually because your trust is our most precious resource.</p>
+      <p>80G tax exemption available for Indian donors. All international donations processed securely via PayPal and Stripe.</p>
+      <div class="donate-trust-badges">
+        <div class="badge"><span class="badge-icon">🔒</span>SSL Secured</div>
+        <div class="badge"><span class="badge-icon">✓</span>80G / 12A Certified</div>
+        <div class="badge"><span class="badge-icon">📋</span>GDPR Compliant</div>
+        <div class="badge"><span class="badge-icon">🏆</span>GuideStar Verified</div>
+      </div>
+    </div>
+    <div class="donate-form reveal reveal-delay-1">
+      <div class="frequency-toggle">
+        <button class="freq-btn active" onclick="setFreq(this)">One-time</button>
+        <button class="freq-btn" onclick="setFreq(this)">Monthly</button>
+        <button class="freq-btn" onclick="setFreq(this)">Annual</button>
+      </div>
+      <label class="form-label">Select Amount</label>
+      <div class="amount-grid">
+        <button class="amount-btn active" onclick="setAmount(this)" data-amount="500">₹500<small>Feeds a family</small></button>
+        <button class="amount-btn" onclick="setAmount(this)" data-amount="1000">₹1,000<small>Books for 5 kids</small></button>
+        <button class="amount-btn" onclick="setAmount(this)" data-amount="2500">₹2,500<small>Medical camp</small></button>
+        <button class="amount-btn" onclick="setAmount(this)" data-amount="5000">₹5,000<small>Plant 50 trees</small></button>
+        <button class="amount-btn" onclick="setAmount(this)" data-amount="10000">₹10,000<small>Sponsor a child</small></button>
+        <button class="amount-btn" onclick="setAmount(this)" data-amount="custom">Custom</button>
+      </div>
+      <input type="number" class="form-input" id="customAmount" placeholder="Enter custom amount (₹)" style="display:none; margin-top:0.75rem">
+      <label class="form-label" style="margin-top:1.5rem">Your Details</label>
+      <input type="text" class="form-input" placeholder="Full Name">
+      <input type="email" class="form-input" placeholder="Email Address">
+      <button class="btn-primary" style="width:100%; padding:1.1rem; font-size:0.85rem" onclick="handleDonate()">
+        Donate Securely →
+      </button>
+      <p class="impact-note">You'll receive a tax receipt within 24 hours.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- GET INVOLVED -->
+<section id="involved">
+  <div class="involved-inner">
+    <div class="reveal" style="text-align:center; margin-bottom:1rem">
+      <div class="section-eyebrow" style="justify-content:center">Join Us</div>
+      <h2 class="section-title">More Ways to <em>Contribute</em></h2>
+    </div>
+    <div class="involved-grid">
+      <div class="involved-card reveal reveal-delay-1">
+        <span class="involved-icon">🤝</span>
+        <div class="involved-title">Volunteer</div>
+        <p class="involved-desc">Offer your time, skills, and heart. From field work to digital outreach, every contribution matters deeply.</p>
+        <a href="#" class="btn-ghost" style="font-size:0.75rem; padding:0.7rem 1.5rem">Apply to Volunteer</a>
+      </div>
+      <div class="involved-card reveal reveal-delay-2">
+        <span class="involved-icon">🏢</span>
+        <div class="involved-title">Corporate CSR</div>
+        <p class="involved-desc">Partner with us to fulfil your CSR mandate while creating measurable, verifiable social impact at scale.</p>
+        <a href="#" class="btn-ghost" style="font-size:0.75rem; padding:0.7rem 1.5rem">Explore Partnership</a>
+      </div>
+      <div class="involved-card reveal reveal-delay-3">
+        <span class="involved-icon">💼</span>
+        <div class="involved-title">Careers</div>
+        <p class="involved-desc">Join a team of dedicated professionals building systems of lasting change. View our open positions and internships.</p>
+        <a href="#" class="btn-ghost" style="font-size:0.75rem; padding:0.7rem 1.5rem">View Openings</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- NEWS -->
+<section id="news">
+  <div class="news-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Latest</div>
+      <h2 class="section-title">Field <em>Updates</em></h2>
+    </div>
+    <div class="news-grid">
+      <div class="news-featured reveal reveal-delay-1">
+        <div class="news-thumb">🌳</div>
+        <div class="news-body">
+          <div class="news-date">April 2, 2026</div>
+          <div class="news-title">10,000 Trees Planted in the Nilgiris in a Single Weekend</div>
+          <p class="news-excerpt">Over 400 volunteers converged on the Nilgiri foothills last weekend for our largest reforestation drive to date. The event marked a milestone in our decade-long commitment to ecological restoration in South India.</p>
+          <a href="#" class="program-link" style="margin-top:1.5rem">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-aside reveal reveal-delay-2">
+        <div class="news-item">
+          <div class="news-item-date">March 18, 2026</div>
+          <div class="news-item-title">New Mobile Clinic Launched in Vidarbha</div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-date">March 5, 2026</div>
+          <div class="news-item-title">Annual Report 2025 Now Available for Download</div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-date">February 20, 2026</div>
+          <div class="news-item-title">Flood Relief Efforts Reach 3,200 Families in Assam</div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-date">February 8, 2026</div>
+          <div class="news-item-title">Luminary Trust Receives National Excellence Award</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="partners-inner reveal">
+    <div class="partners-label">Trusted by Leading Organisations</div>
+    <div class="partners-row">
+      <div class="partner-logo">UNICEF India</div>
+      <div class="partner-logo">Tata Trusts</div>
+      <div class="partner-logo">GiveIndia</div>
+      <div class="partner-logo">Azim Premji Foundation</div>
+      <div class="partner-logo">Bill & Melinda Gates</div>
+      <div class="partner-logo">NITI Aayog</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <div class="section-eyebrow">Reach Us</div>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <p>Whether you're a donor, a volunteer, a journalist, or simply curious — we welcome every conversation.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Head Office</div>
+            <div class="contact-detail-text">12, Harmony Lane, Indiranagar,<br>Bengaluru — 560 038, Karnataka</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-text">hello@luminarytrust.org</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-text">+91 80 4567 8900</div>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link" title="Instagram">📷</a>
+        <a href="#" class="social-link" title="LinkedIn">in</a>
+        <a href="#" class="social-link" title="Facebook">f</a>
+        <a href="#" class="social-link" title="Twitter/X">𝕏</a>
+      </div>
+      <div class="map-block"><span>📍 Google Maps Integration</span></div>
+    </div>
+    <div class="contact-form reveal reveal-delay-1">
+      <label class="form-label">Send a Message</label>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-input" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-input" placeholder="Email Address">
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-input" placeholder="Subject">
+      </div>
+      <div class="form-group">
+        <textarea class="form-input" placeholder="Your message..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%; padding:1.1rem" onclick="handleContact()">Send Message →</button>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Luminary Trust</span>
+        <p class="footer-tagline">Illuminating lives and transforming futures across India since 2008. 80G/12A certified non-profit.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Organisation</div>
+        <ul class="footer-links">
+          <li><a href="#mission">About Us</a></li>
+          <li><a href="#programs">Our Programs</a></li>
+          <li><a href="#campaigns">Campaigns</a></li>
+          <li><a href="#involved">Get Involved</a></li>
+          <li><a href="#news">News & Media</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="#">Annual Reports</a></li>
+          <li><a href="#">Tax Certificates</a></li>
+          <li><a href="#">Press Kit</a></li>
+          <li><a href="#">Volunteer Guide</a></li>
+          <li><a href="#">CSR Brochure</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Donor Rights</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Luminary Trust. All Rights Reserved. Reg. No. MH/2008/1234.</div>
+      <div class="footer-legal">
+        <a href="#">Sitemap</a>
+        <a href="#">Accessibility</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+  </div>
+</footer>
+ 
+<!-- NOTIFICATION TOAST -->
+<div class="notify" id="notify"></div>
+ 
+<script>
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+ 
+  // ── MOBILE NAV ──
+  function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+ 
+  // ── REVEAL ON SCROLL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+ 
+  // ── COUNTER ANIMATION ──
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = target >= 1000 ? '+' : '+';
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = Math.round(current).toLocaleString() + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 25);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.impact-number').forEach(el => counterObserver.observe(el));
+ 
+  // ── PROGRESS BARS ──
+  const progressObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.progress-fill');
+        if (fill) { setTimeout(() => fill.style.width = fill.dataset.width, 300); }
+        progressObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.program-card').forEach(el => progressObserver.observe(el));
+ 
+  // ── AMOUNT BUTTONS ──
+  function setAmount(btn) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const custom = document.getElementById('customAmount');
+    custom.style.display = btn.dataset.amount === 'custom' ? 'block' : 'none';
+  }
+ 
+  // ── FREQUENCY BUTTONS ──
+  function setFreq(btn) {
+    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+ 
+  // ── NOTIFICATIONS ──
+  function showNotify(msg) {
+    const n = document.getElementById('notify');
+    n.textContent = msg; n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 4000);
+  }
+ 
+  function handleDonate() {
+    const name = document.querySelector('.donate-form input[type="text"]').value;
+    const email = document.querySelector('.donate-form input[type="email"]').value;
+    if (!name || !email) { showNotify('Please fill in your name and email.'); return; }
+    showNotify('✓ Redirecting to secure payment gateway…');
+  }
+ 
+  function handleContact() {
+    showNotify('✓ Message sent! We\'ll respond within 24 hours.');
+  }
+</script>
+</body>
+</html>
+ 
